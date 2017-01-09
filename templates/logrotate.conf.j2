@@ -1,0 +1,35 @@
+# {{ ansible_managed }}
+
+# see "man logrotate" for details
+# rotate log files weekly
+{{ logrotate_default_rotation }}
+
+# keep 4 weeks worth of backlogs
+rotate {{ logrotate_default_backlogs }}
+
+# create new (empty) log files after rotating old ones
+{{ logrotate_default_after_rotate_action }}
+
+# use date as a suffix of the rotated file
+{{ logrotate_default_suffix }}
+
+# uncomment this if you want your log files compressed
+{{ logrotate_default_compress }}
+
+# RPM packages drop log rotation information into this directory
+include {{ logrotate_default_includes_dir }}
+
+# no packages own wtmp and btmp -- we'll rotate them here
+/var/log/wtmp {
+    monthly
+    create 0664 root utmp
+    minsize 1M
+    rotate 1
+}
+
+/var/log/btmp {
+    missingok
+    monthly
+    create 0600 root utmp
+    rotate 1
+}
