@@ -1,11 +1,11 @@
 Logrotate
 =========
 
-This role install logrotate and manages the main configuration along with the indvidual servieces.
+This role installs logrotate and manages the main configuration along with the indvidual services.
 
 Requirements
 ------------
-None.
+None
 
 Role Variables
 --------------
