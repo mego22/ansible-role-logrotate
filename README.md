@@ -1,41 +1,53 @@
-Base
+Logrotate
 =========
 
-This is the base role for my [Ansible](https://ansible.com) roles. Included with the standard Ansible directory structure is a setup for using [test-kitchen](http://kitchen.ci/) with [Docker](https://docker.com) for TDD.
+This role install logrotate and manages the main configuration along with the indvidual servieces.
 
-How to use
-----------
+Requirements
+------------
+None.
 
-    git clone git@github.com:mego22/ansible-base.git new-role
-    cd new-role/
-    perl -pi -e s,ansible-base,new-role, ./test/integration/default/default.yml
-    rm -rf .git
-    git init
-    git add .
-    git commit -m "Initial commit."
-    git remote add origin git@github.com:USER/new-role.git
-    push -u origin master
+Role Variables
+--------------
 
-TDD
----
-### Prerequisites
-* [Ansible](http://docs.ansible.com/ansible/intro_installation.html)
-* [Docker](https://docs.docker.com/engine/installation/)
-* [Ruby](https://rvm.io/rvm/install)
-* [Bundler](http://bundler.io/)
-* [Ansible-lint](https://github.com/willthames/ansible-lint)
-* make
+How often to rotate logs (monthly, weekly, daily):
 
-### The Makefile
-The Makefile is used as a wrapper for frequently run tasks. Mostly its wrapping `bundle exec kitchen`.
+    logrotate_default_rotation: weekly
 
-    converge  kitchen converge
-    create    kitchen create
-    destroy   kitchen destroy
-    lint      ansible-lint
-    list      kitchen list
-    login     kitchen login
-    setup     Install needed gems for test-kitchen
-    syntax    ansible-playbook syntax-check
-    test      kitchen test
-    verify    kitchen verify
+How far back to keep logs:
+
+    logrotate_default_backlogs: 4
+
+What to do after rotate a log file:
+
+    logrotate_default_after_rotate_action: create
+
+What suffix to use for rotated logs:
+
+    logrotate_default_suffix: dateext
+
+Whether to compress the rotated files:
+
+    logrotate_default_compress: compress
+
+Location of the service files:
+
+    logrotate_default_includes_dir: /etc/logrotate.d
+
+What services to setup for rotation
+
+    logrotate_services: []
+
+Example Playbook
+----------------
+
+Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+
+    - hosts: servers
+      roles:
+         - ansible-role-logrotate
+
+License
+-------
+
+MIT
