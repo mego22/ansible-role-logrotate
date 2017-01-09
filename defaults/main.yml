@@ -1,3 +1,9 @@
 ---
-# defaults file for ansible-base
-host_name: "name_me_please"
+logrotate_default_rotation: weekly
+logrotate_default_backlogs: 4
+logrotate_default_after_rotate_action: create
+logrotate_default_suffix: dateext
+logrotate_default_compress: compress
+logrotate_default_includes_dir: /etc/logrotate.d
+
+logrotate_services: []

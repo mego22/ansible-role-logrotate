@@ -1,0 +1,6 @@
+---
+
+- name: Logrotate | Install logrotate
+  apt:
+    name: logrotate
+    state: present

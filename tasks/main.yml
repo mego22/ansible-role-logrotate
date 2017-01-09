@@ -1,2 +1,9 @@
 ---
-# add tasks to be run here
+
+- include: RedHat-install.yml
+  when: ansible_os_family == "RedHat"
+
+- include: Debian-install.yml
+  when: ansible_os_family == "Debian"
+
+- include: configure.yml
