@@ -1,0 +1,19 @@
+---
+
+  - name: Logrotate | Applying main configuration
+    template:
+      src: logrotate.conf.j2
+      dest: /etc/logotate.conf
+      owner: root
+      group: root
+      mode: 0644
+
+  - name: Logrotate | Applying service configurations
+    template:
+      src: logrotate.service.j2
+      dest: "{{ logrotate_default_includes_dir}}/{{ item.name }}"
+      owner: root
+      group: root
+      mode: 0644
+    with_items: "{{ logrotate_services }}"
+    when: logrotate_services is defined

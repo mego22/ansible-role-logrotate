@@ -1,0 +1,6 @@
+---
+
+- name: Logrotate | Install logrotate
+  yum:
+    name: logrotate
+    state: present
